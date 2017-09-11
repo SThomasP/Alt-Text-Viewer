@@ -3,7 +3,7 @@ function getImagesWithAlt(){
     var i;
     var y = [];
     for (i =0; i<x.length; i++) {
-        if ( x[i].title != ""){
+        if ( (x[i].title != "") && (x[i].width * x[i].height > 39000)){
           y.push(x[i]);
         }
     }
