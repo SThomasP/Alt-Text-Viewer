@@ -1,19 +1,21 @@
 {
   "manifest_version": 2,
   "name": "Alt Text Viewer",
-  "version": "2.0",
+  "version": "3.0",
 
   "icons": {
    "48": "icons/icon-48.png",
    "96": "icons/icon-96.png"
  },
-
+ "permissions": ["storage"],
   "description": "Shows the alt text of large images seperately beneath the image. Designed for webcomics such as 'Dumbing of Age' and 'XKCD'",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["show-alt-text.js"]
+      "js": ["showAltText.js"]
     }
-  ]
-
+  ],
+  "background":{
+    "scripts": ["backgroundScript.js"]
+  }
 }
