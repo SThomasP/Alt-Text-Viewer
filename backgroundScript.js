@@ -13,24 +13,24 @@ function onError(e){
 
 
 // to be run when the app is installed.
-function initStorage(settings){
-  if (settings.reason === "install"){
+function checkStorage(res){
     var keys = Object.keys(defaults);
     for (var i = 0; i < keys.length;i++){
       var nthKey = keys[i];
-      var storage = {};
-      storage[nthKey] = defaults[nthKey];
-      browser.storage.local.set(storage);
-      console.log(nthKey+ ' set');
+      if (!res[nthKey]){
+        var storage = {};
+        storage[nthKey] = defaults[nthKey];
+        browser.storage.local.set(storage);
+        console.log(nthKey+ ' set');
+      }
     }
+  if (!res.defaults){
+    browser.storage.local.set({defaults: defaults});
+    console.log("default values set.");
   }
-  browser.storage.local.set({defaults: defaults});
-  console.log("default values set.");
 }
 
-browser.storage.onChanged.addListener(function (changes, type){
-  console.log(changes);
-});
-
-browser.runtime.onInstalled.addListener(initStorage);
-
+var keys = Object.keys(defaults);
+keys.push('defaults');
+const gettingStoredSettings = browser.storage.local.get(keys);
+gettingStoredSettings.then(checkStorage, onError);
