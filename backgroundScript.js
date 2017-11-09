@@ -21,12 +21,12 @@ function checkStorage(res){
         var storage = {};
         storage[nthKey] = defaults[nthKey];
         browser.storage.local.set(storage);
-        console.log(nthKey+ ' set');
+        // console.log(nthKey+ ' set');
       }
     }
   if (!res.defaults){
     browser.storage.local.set({defaults: defaults});
-    console.log("default values set.");
+    // console.log("default values set.");
   }
 }
 
